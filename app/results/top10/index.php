@@ -12,15 +12,15 @@ require_once '../../models/Judge.php';
 const EVENTS = [
     [
         'slug'    => 'close-door-interview',
-        'percent' => 50
+        'percent' => 40
     ],
     [
         'slug'    => 'production-number',
-        'percent' => 15
+        'percent' => 20
     ],
     [
         'slug'    => 'swimsuit-competition',
-        'percent' => 15
+        'percent' => 20
     ],
     [
         'slug'    => 'evening-gown-competition',

@@ -11,7 +11,7 @@ require_once '../../models/Judge.php';
 // involved events
 const EVENTS = [
     [
-        'slug'    => 'preliminary-qa',
+        'slug'    => 'top10-finalists-qa',
         'percent' => 100
     ]
 ];
