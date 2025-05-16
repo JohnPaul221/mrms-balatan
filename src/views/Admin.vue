@@ -87,16 +87,17 @@
                                 <div>
                                     Judge {{ judge.number }}<span v-if="judge.is_chairman == 1">*</span>
                                 </div>
+                                <div class="text-blue-darken-2">
+                                    <small>Rank</small>
+                                </div>
                                 <div
                                     :class="{
                                         'text-dark-darken-1': judge.is_chairman == 0,
                                         'text-red-darken-4': judge.is_chairman == 1
                                     }"
+                                    style="margin-top: -10px;"
                                 >
-                                    <small>Total</small>
-                                </div>
-                                <div class="text-blue-darken-2" style="margin-top: -10px;">
-                                    <small>Rank</small>
+                                    <small>Rating</small>
                                 </div>
                             </div>
 
@@ -111,9 +112,6 @@
                                 </v-chip>
                             </div>
                         </th>
-                        <th class="text-center text-uppercase font-weight-bold text-green-darken-4 py-3">
-                            Total<br>Avg.
-                        </th>
                         <th class="text-center text-uppercase font-weight-bold text-blue-darken-4 py-3">
                             Rank<br>Total
                         </th>
@@ -122,6 +120,9 @@
                         </th>
                         <th class="text-center text-uppercase font-weight-bold text-grey-darken-1 py-3">
                             Initial<br>Rank
+                        </th>
+                        <th class="text-center text-uppercase font-weight-bold text-green-darken-4 py-3">
+                            Rating<br>Avg.
                         </th>
                         <th class="text-center text-uppercase font-weight-bold text-grey-darken-4 py-3">
                             Final<br>Rank
@@ -179,17 +180,6 @@
                             }"
                         >
                             <div
-                                :class="{
-                                    'text-dark-darken-1': judge.is_chairman == 0,
-                                    'text-red-darken-3': judge.is_chairman == 1
-                                }"
-                            >
-                                <span :class="{ blurred: !team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.ratings.inputs[`judge_${judge.id}`].final.deducted <= 0 }">
-                                    {{ team.ratings.inputs[`judge_${judge.id}`].final.deducted.toFixed(2) }}
-                                </span>
-                            </div>
-
-                            <div
                                 class="text-right font-weight-bold text-blue-darken-2"
                                 :class="{
                                     'bg-grey-lighten-3' : !team.ratings.inputs[`judge_${judge.id}`].final.is_locked,
@@ -201,36 +191,47 @@
                                     {{ team.ratings.inputs[`judge_${judge.id}`].rank.fractional.toFixed(2) }}
                                 </span>
                             </div>
-                        </td>
-                        <td
-                            class="text-right font-weight-bold text-green-darken-4"
-                            :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
-                        >
-                            <span class="pr-2">{{ team.ratings.average.toFixed(2) }}</span>
+
+                            <div
+                                :class="{
+                                    'text-dark-darken-1': judge.is_chairman == 0,
+                                    'text-red-darken-3': judge.is_chairman == 1
+                                }"
+                            >
+                                <span :class="{ blurred: !team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.ratings.inputs[`judge_${judge.id}`].final.deducted <= 0 }">
+                                    {{ team.ratings.inputs[`judge_${judge.id}`].final.deducted.toFixed(2) }}
+                                </span>
+                            </div>
                         </td>
                         <td
                             class="text-right font-weight-bold text-blue-darken-4"
                             :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
                         >
-                            <span class="pr-2">{{ team.rank.total.fractional.toFixed(2) }}</span>
+                            <span>{{ team.rank.total.fractional.toFixed(2) }}</span>
                         </td>
                         <td
                             class="text-right font-weight-bold text-blue-darken-4"
                             :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
                         >
-                            <span class="pr-2">{{ team.rank.average.fractional.toFixed(2) }}</span>
+                            <span>{{ team.rank.average.fractional.toFixed(2) }}</span>
                         </td>
                         <td
                             class="text-right font-weight-bold text-grey-darken-1"
                             :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
                         >
-                            <span class="pr-2">{{ team.rank.initial.fractional.toFixed(2) }}</span>
+                            <span>{{ team.rank.initial.fractional.toFixed(2) }}</span>
                         </td>
                         <td
-                            class="text-right font-weight-bold text-h6"
+                            class="text-right font-weight-bold text-green-darken-4"
                             :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
                         >
-                            <span class="pr-3">{{ team.rank.final.fractional }}</span>
+                            <span>{{ team.ratings.average.toFixed(2) }}</span>
+                        </td>
+                        <td
+                            class="text-center font-weight-bold text-h6"
+                            :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
+                        >
+                            <span>{{ team.rank.final.fractional }}</span>
                         </td>
                         <td
                             class="text-center font-weight-bold text-body-1"
@@ -245,7 +246,7 @@
                             <v-row class="justify-center">
                                 <v-col
                                     v-for="technical in technicals" :key="technical.id"
-                                    :md="signatoryColumnWidth"
+                                    :style="{ 'flex': `0 0 ${(signatoryColumnWidth / 12) * 100}%`, 'max-width': `${(signatoryColumnWidth / 12) * 100}%` }"
                                 >
                                     <v-card class="text-center mb-5" :class="{ 'text-warning': technical.calling }" flat>
                                         <v-card-title class="pt-16 pb-1 font-weight-bold">

@@ -270,31 +270,31 @@ foreach ($judges as $judge) {
             border-left: 2px solid #aaa !important;
         }
     </style>
-    <title>Top <?= sizeof($titles) ?> | <?= $competition_title ?> Semi-Finalists </title>
+    <title>Top <?= sizeof($titles) ?> | <?= $competition_title ?> Finalists </title>
 </head>
 <body>
-<?php if (!empty($judgesWithUnlockedRatings)) { ?>
-    <div class="alert alert-warning text-center">
-        <h5><i class="fas fa-exclamation-triangle me-2"></i>Warning: The following judges have unlocked ratings:</h5>
-        <div class="d-flex flex-row justify-content-center">
-            <img src="../../crud/uploads/cmon.gif" alt="Warning" style="width: 100px; height: auto; padding-right: 10px">
-            <ul class="list-unstyled mb-0">
-                <?php foreach ($judgesWithUnlockedRatings as $judgeInfo) { ?>
-                    <li style="font-weight: bolder !important; font-size: larger">
-                        <?= $judgeInfo['name'] ?> (Judge <?= $judgeInfo['number'] ?>) - Events: <?= $judgeInfo['events'] ?>
-                    </li>
-                <?php } ?>
-            </ul>
+    <?php if (!empty($judgesWithUnlockedRatings)) { ?>
+        <div class="alert alert-warning text-center">
+            <h5><i class="fas fa-exclamation-triangle me-2"></i>Warning: The following judges have unlocked ratings:</h5>
+            <div class="d-flex flex-row justify-content-center">
+                <img src="../../crud/uploads/cmon.gif" alt="Warning" style="width: 100px; height: auto; padding-right: 10px">
+                <ul class="list-unstyled mb-0">
+                    <?php foreach ($judgesWithUnlockedRatings as $judgeInfo) { ?>
+                        <li style="font-weight: bolder !important; font-size: larger">
+                            <?= $judgeInfo['name'] ?> (Judge <?= $judgeInfo['number'] ?>) - Events: <?= $judgeInfo['events'] ?>
+                        </li>
+                    <?php } ?>
+                </ul>
+            </div>
+            <p class="mt-2">Please make sure the ratings are all locked before finalizing results.</p>
         </div>
-        <p class="mt-2">Please make sure the ratings are all locked before finalizing results.</p>
-    </div>
-<?php } ?>
+    <?php } ?>
 <div class="p-1">
     <table class="table table-bordered result">
         <thead class="bt">
         <tr class="table-secondary">
             <th colspan="3" rowspan="3" class="text-center bt br bl bb">
-                <h1 class="m-0">TOP <?= sizeof($titles) ?> Semi-Finalists</h1>
+                <h1 class="m-0">TOP <?= sizeof($titles) ?> Finalists</h1>
                 <h5><?= $competition_title ?></h5>
             </th>
             <?php for($i=0; $i<sizeof($events); $i++) { ?>
@@ -317,13 +317,14 @@ foreach ($judges as $judge) {
         </tr>
         <tr class="table-secondary">
             <?php for($i=0; $i<sizeof(EVENTS); $i++) { ?>
-                <th colspan="2" class="text-center bl"><span class="opacity-75">Average</span></th>
+                <th class="text-center bl text-primary"><span>Final<br>Rank</span></th>
+                <th class="text-center text-primary"><span>Rank<br>Equiv.</span></th>
                 <th rowspan="2" class="bb br text-center"><h5 class="m-0"><?= EVENTS[$i]['percent'] ?>%</h5></th>
             <?php } ?>
         </tr>
         <tr class="table-secondary">
             <?php for($i=0; $i<sizeof(EVENTS); $i++) { ?>
-                <th colspan="2" class="bb text-center">Rank / Equiv.</th>
+                <th colspan="2" class="bb text-right" style="text-align: right"><span class="opacity-75">Average</span></th>
             <?php } ?>
         </tr>
         </thead>
@@ -341,10 +342,10 @@ foreach ($judges as $judge) {
                 <!-- avatar -->
                 <td rowspan="2" class="bb" style="width: 56px;">
                     <img
-                            class="team-avatar"
-                            src="../../crud/uploads/<?= $team['info']['avatar'] ?>"
-                            alt="<?= $team['info']['number'] ?>"
-                            style="width: 56px; border-radius: 100%"
+                        class="team-avatar"
+                        src="../../crud/uploads/<?= $team['info']['avatar'] ?>"
+                        alt="<?= $team['info']['number'] ?>"
+                        style="width: 56px; border-radius: 100%"
                     >
                 </td>
 
@@ -354,42 +355,37 @@ foreach ($judges as $judge) {
                     <small class="team-location m-0"><?= $team['info']['location'] ?></small>
                 </td>
 
-                <!-- averages -->
-                <?php for($i=0; $i<sizeof(EVENTS); $i++) { ?>
-                    <td colspan="2" class="pe-3" align="right"><span class="opacity-75"><?= number_format($team['inputs'][EVENTS[$i]['slug']]['average'], 2) ?></span></td>
-                    <td align="right" class="pe-3 br text-secondary fw-bold"><span class="opacity-75"><?= number_format($team['inputs'][EVENTS[$i]['slug']]['average_equiv'], 2) ?></span></td>
+                <!-- rank -->
+                <?php for($i=0; $i<sizeof($events); $i++) { ?>
+                    <td align="right" class="pe-2 text-primary"><?= number_format($team['inputs'][EVENTS[$i]['slug']]['rank'], 2) ?></td>
+                    <td align="right" class="pe-2 text-primary"><span class="opacity-75"><?= number_format($team['inputs'][EVENTS[$i]['slug']]['rank_ave'], 2) ?></span></td>
+                    <td align="right" class="br pe-2 text-primary fw-bold"><span class="opacity-75"><?= number_format($team['inputs'][EVENTS[$i]['slug']]['rank_ave_equiv'], 2) ?></span></td>
                 <?php } ?>
 
-                <!-- total average -->
-                <td class="br pe-3 text-secondary fw-bold" align="right"><?= number_format($team['average'], 2) ?></td>
+                <!-- total rank -->
+                <td class="br pe-2 text-primary fw-bold" align="right"><?= number_format($team['rank']['total'], 2) ?></td>
 
-                <!-- initial rank (spacer) -->
-                <td class="br"></td>
+                <!-- initial rank -->
+                <td rowspan="2" class="br bb pe-2 fw-bold" align="right"><h5 class="m-0 opacity-50"><?= number_format($team['rank']['initial'], 2) ?></h5></td>
 
-                <!-- final rank (spacer) -->
-                <td class="br"></td>
+                <!-- final rank -->
+                <td rowspan="2" class="br bb pe-3 fw-bold" align="right"><h5 class="m-0"><?= number_format($team['rank']['final']['fractional'], 2) ?></h5></td>
 
                 <!-- slot -->
-                <td rowspan="2" class="bb br text-center" style="line-height: 1.1; vertical-align: bottom">
+                <td rowspan="2" class="bb br text-center" style="line-height: 1.1;">
                     <h4 class="m-0"><?= $team['title'] ?></h4>
                 </td>
             </tr>
 
             <tr<?= empty($judgesWithUnlockedRatings) && !$team['unlocked'] && $team['title'] !== '' ? ' class="table-warning"' : '' ?>>
-                <?php for($i=0; $i<sizeof($events); $i++) { ?>
-                    <td align="right" class="bb pe-3 text-primary"><?= number_format($team['inputs'][EVENTS[$i]['slug']]['rank'], 2) ?></td>
-                    <td align="right" class="bb pe-3 text-primary"><span class="opacity-75"><?= number_format($team['inputs'][EVENTS[$i]['slug']]['rank_ave'], 2) ?></span></td>
-                    <td align="right" class="bb br pe-3 text-primary fw-bold"><span class="opacity-75"><?= number_format($team['inputs'][EVENTS[$i]['slug']]['rank_ave_equiv'], 2) ?></span></td>
+                <!-- average -->
+                <?php for($i=0; $i<sizeof(EVENTS); $i++) { ?>
+                    <td colspan="2" class="bb pe-2" align="right"><span class="opacity-75"><?= number_format($team['inputs'][EVENTS[$i]['slug']]['average'], 2) ?></span></td>
+                    <td align="right" class="bb pe-2 br text-secondary fw-bold"><span class="opacity-75"><?= number_format($team['inputs'][EVENTS[$i]['slug']]['average_equiv'], 2) ?></span></td>
                 <?php } ?>
 
-                <!-- total rank -->
-                <td class="br bb pe-3 text-primary fw-bold" align="right"><?= number_format($team['rank']['total'], 2) ?></td>
-
-                <!-- initial rank -->
-                <td class="br bb pe-3 fw-bold" align="right"><h5 class="m-0 opacity-50"><?= number_format($team['rank']['initial'], 2) ?></h5></td>
-
-                <!-- final rank -->
-                <td class="br bb pe-3 fw-bold" align="right"><h5 class="m-0"><?= number_format($team['rank']['final']['fractional'], 2) ?></h5></td>
+                <!-- total average -->
+                <td class="br bb pe-2 text-secondary fw-bold" align="right"><?= number_format($team['average'], 2) ?></td>
             </tr>
         <?php } ?>
         </tbody>
@@ -399,7 +395,7 @@ foreach ($judges as $judge) {
     <div class="container-fluid mt-4 pb-2">
         <div class="row justify-content-center">
             <?php foreach($judges as $judge) { ?>
-                <div class="col-md-3">
+                <div class="col-sm-3 col-md-3">
                     <div class="mt-5 pt-3 text-center">
                         <h5 class="mb-0"><?= $judge->getName() ?></h5>
                     </div>
@@ -426,8 +422,7 @@ foreach ($judges as $judge) {
 
             <!-- unordered -->
             <div class="col-md-6" align="center">
-                <h1><b>TOP <?= sizeof($titles) ?></b> Semi-Finalists in <b class="text-danger">Random</b> Order</h1>
-                <h4>FOR ANNOUNCEMENT</h4>
+                <h1><b>TOP <?= sizeof($titles) ?></b> Finalists in <b class="text-danger">Random</b> Order</h1>
                 <div class="mt-4" style="width: 80%;">
                     <table class="table table-bordered mt-3">
                         <tbody>
@@ -448,9 +443,9 @@ foreach ($judges as $judge) {
                                     <!-- avatar -->
                                     <td style="width: 88px;">
                                         <img
-                                                src="../../crud/uploads/<?= $team['info']['avatar'] ?>"
-                                                alt="<?= $team['info']['number'] ?>"
-                                                style="width: 100%; border-radius: 100%"
+                                            src="../../crud/uploads/<?= $team['info']['avatar'] ?>"
+                                            alt="<?= $team['info']['number'] ?>"
+                                            style="width: 100%; border-radius: 100%"
                                         >
                                     </td>
 
@@ -470,14 +465,14 @@ foreach ($judges as $judge) {
             </div>
         </div>
 
-        <div class="row justify-content-center" style="page-break-before: always;">
+        <?php /*<div class="row justify-content-center" style="page-break-before: always;">
             <div class="col-md-12" align="center">
                 <img src="../../crud/uploads/competition.png" style="width: 256px;" alt="Event">
             </div>
 
             <!-- ordered -->
             <div class="col-md-6" align="center">
-                <h1><b>TOP <?= sizeof($titles) ?></b> Semi-Finalists in <b class="text-success">Proper</b> Order</h1>
+                <h1><b>TOP <?= sizeof($titles) ?></b> Finalists in <b class="text-success">Proper</b> Order</h1>
                 <div class="mt-4" style="width: 80%;">
                     <table class="table table-bordered mt-3">
                         <tbody>
@@ -518,7 +513,7 @@ foreach ($judges as $judge) {
                     </table>
                 </div>
             </div>
-        </div>
+        </div>*/ ?>
     </div>
 </div>
 
