@@ -62,7 +62,7 @@ require_once '../../models/Event.php';
                     <tr class="table-secondary">
                         <!-- event title -->
                         <th colspan="3" rowspan="2" class="text-center bl bt br">
-                            <h2 class="text-center text-uppercase fw-bold m-0"><?= $event->getTitle() ?></h2>
+                            <h1 class="text-center text-uppercase fw-bold m-0"><?= $event->getTitle() ?></h1>
                         </th>
 
                         <!-- criteria title headers -->
@@ -89,7 +89,14 @@ require_once '../../models/Event.php';
                         <?php } ?>
 
                         <!-- total spacer -->
-                        <th class="table-success bb br"></th>
+                        <th class="table-success text-center bb br">
+                            <?php $total_percent = $event->getTotalCriteriaPercentage(); ?>
+                            <small>
+                                <?= number_format(($total_percent * 0.60), 2) ?>
+                                -
+                                <?= ($total_percent >= 100) ? number_format($total_percent, 0) : number_format($total_percent, 2) ?>
+                            </small>
+                        </th>
 
                         <!-- rank notes -->
                         <th class="table-primary text-center bb br"><small>1 = <i>highest</i></small></th>
@@ -138,7 +145,7 @@ require_once '../../models/Event.php';
                 </table>
 
                 <div class="row justify-content-center pt-5">
-                    <div class="col-md-7">
+                    <div class="col-7 col-sm-7 col-md-7">
                         <p class="py-2 m-0">
                             <b>NOTE: </b>
                             Please utilize this printed rating sheet for note-taking purposes only.
@@ -148,7 +155,7 @@ require_once '../../models/Event.php';
                         </p>
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="col-2 col-sm-2 col-md-2">
                         <div class="h-100 d-flex justify-content-center align-items-center">
                             <img src="/missbuhi/aclc-iriga.png" alt="ACLC College of Iriga (Official Tabulator)" style="width: 156px;"/>
                         </div>
