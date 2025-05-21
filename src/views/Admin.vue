@@ -225,7 +225,7 @@
                             class="text-right font-weight-bold text-green-darken-4"
                             :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
                         >
-                            <span>{{ team.ratings.average.toFixed(2) }}</span>
+                            <span :style="{ 'opacity': (this.teams_with_ties.includes(teamKey)) ? 1 : 0.38 }">{{ team.ratings.average.toFixed(2) }}</span>
                         </td>
                         <td
                             class="text-center font-weight-bold text-h6"
@@ -375,11 +375,12 @@
 		},
         data() {
             return {
-                event     : null,
-                teams     : [],
-                judges    : [],
-                technicals: [],
-                winners   : {},
+                event          : null,
+                teams          : [],
+                judges         : [],
+                technicals     : [],
+                winners        : {},
+                teams_with_ties: [],
 
                 timer: null,
                 openUnlockDialog: false,
@@ -448,11 +449,12 @@
                     if (this.timer)
                         clearTimeout(this.timer);
 
-                    this.event      = null;
-                    this.teams      = [];
-                    this.judges     = [];
-                    this.technicals = [];
-                    this.winners    = {};
+                    this.event           = null;
+                    this.teams           = [];
+                    this.judges          = [];
+                    this.technicals      = [];
+                    this.winners         = {};
+                    this.teams_with_ties = [];
                     this.tabulate();
                 }
             }
@@ -472,11 +474,12 @@
                         },
                         success: (data) => {
                             data = JSON.parse(data);
-                            this.event      = data.event;
-                            this.teams      = data.results.teams;
-                            this.judges     = data.results.judges;
-                            this.technicals = data.results.technicals;
-                            this.winners    = data.results.winners;
+                            this.event           = data.event;
+                            this.teams           = data.results.teams;
+                            this.judges          = data.results.judges;
+                            this.technicals      = data.results.technicals;
+                            this.winners         = data.results.winners;
+                            this.teams_with_ties = data.results.teams_with_ties;
 
                             // request again
                             if(data.event.slug === this.$route.params.eventSlug) {
