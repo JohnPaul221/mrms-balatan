@@ -1,6 +1,6 @@
 # mrms-balatan
 
-Tabulation System for Miss Buhi 
+Tabulation System for Mister and Miss Balatan
 
 ---
 ## Development Setup
@@ -20,7 +20,7 @@ Here are the steps to set up the development environment for this project:
    to **`app/config/database.php`**, then modify the database connection settings in the new file.
 
 5. Inside [phpMyAdmin](http://localhost/phpmyadmin),
-   create a MySQL database named `mrms-balatan` and import [mrms-balatan.sql](missbuhi.sql) into it.
+   create a MySQL database named `mrms-balatan` and import [mrms-balatan.sql](mrms-balatan.sql) into it.
 
 6. Open the terminal and navigate to the project directory **mrms-balatan**.
 
