@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2026 at 12:55 PM
+-- Generation Time: Feb 08, 2026 at 01:47 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -438,7 +438,7 @@ INSERT INTO `judges` (`id`, `number`, `name`, `avatar`, `username`, `password`, 
 (1, 1, 'Judge 01', 'no-avatar.jpg', 'judge01', 'judge01', NULL, NULL, NULL, '2023-04-06 13:58:11', '2026-02-06 10:14:00'),
 (2, 2, 'Judge 02', 'no-avatar.jpg', 'judge02', 'judge02', NULL, NULL, NULL, '2023-04-06 13:58:28', '2026-02-05 14:29:29'),
 (3, 3, 'Judge 03', 'no-avatar.jpg', 'judge03', 'judge03', NULL, NULL, NULL, '2023-04-06 13:58:42', '2026-02-05 02:43:30'),
-(4, 4, 'Judge 04', 'no-avatar.jpg', 'judge04', 'judge04', 'final-q-and-a-2', NULL, '2026-02-06 11:55:41', '2023-04-06 13:59:26', '2026-02-06 11:55:41'),
+(4, 4, 'Judge 04', 'no-avatar.jpg', 'judge04', 'judge04', 'final-q-and-a-2', NULL, '2026-02-06 12:29:29', '2023-04-06 13:59:26', '2026-02-06 12:29:29'),
 (5, 5, 'Judge 05', 'no-avatar.jpg', 'judge05', 'judge05', NULL, NULL, NULL, '2023-04-06 14:00:00', '2026-02-05 02:44:10'),
 (6, 6, 'Judge 06', 'no-avatar.jpg', 'judge06', 'judge06', NULL, NULL, '2026-02-05 03:18:06', '2024-05-13 13:49:13', '2026-02-05 09:51:09'),
 (8, 7, 'Tabulator01', 'no-avatar.jpg', 'Tabulator01', 'Tabulator01', NULL, NULL, NULL, '2024-05-21 05:57:36', '2026-02-05 14:15:05'),
