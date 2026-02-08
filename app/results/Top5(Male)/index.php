@@ -286,7 +286,7 @@ foreach ($judges as $judge) {
             border-left: 2px solid #aaa !important;
         }
     </style>
-    <title>Top <?= sizeof($titles) ?> | <?= $competition_title ?> Semi-Finalists </title>
+    <title>Top <?= sizeof($titles) ?> | <?= $competition_title ?> Finalists </title>
 </head>
 <body>
 <?php if (!empty($judgesWithUnlockedRatings)) { ?>
@@ -310,7 +310,7 @@ foreach ($judges as $judge) {
         <thead class="bt">
         <tr class="table-secondary">
             <th colspan="3" rowspan="3" class="text-center bt br bl bb">
-                <h1 class="m-0">TOP <?= sizeof($titles) ?> Semi-Finalists</h1>
+                <h1 class="m-0">TOP <?= sizeof($titles) ?> Finalists</h1>
                 <h5><?= $competition_title ?></h5>
             </th>
             <?php for($i=0; $i<sizeof($events); $i++) { ?>
@@ -442,7 +442,7 @@ foreach ($judges as $judge) {
 
             <!-- unordered -->
             <div class="col-md-6" align="center">
-                <h1><b>TOP <?= sizeof($titles) ?></b> Semi-Finalists in <b class="text-danger">Random</b> Order</h1>
+                <h1><b>TOP <?= sizeof($titles) ?></b> Finalists in <b class="text-danger">Random</b> Order</h1>
                 <h4>FOR ANNOUNCEMENT</h4>
                 <div class="mt-4" style="width: 80%;">
                     <table class="table table-bordered mt-3">
@@ -493,7 +493,7 @@ foreach ($judges as $judge) {
 
             <!-- ordered -->
             <div class="col-md-6" align="center">
-                <h1><b>TOP <?= sizeof($titles) ?></b> Semi-Finalists in <b class="text-success">Proper</b> Order</h1>
+                <h1><b>TOP <?= sizeof($titles) ?></b> Finalists in <b class="text-success">Proper</b> Order</h1>
                 <div class="mt-4" style="width: 80%;">
                     <table class="table table-bordered mt-3">
                         <tbody>
