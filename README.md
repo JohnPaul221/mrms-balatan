@@ -49,7 +49,7 @@ Before getting started, ensure that you have [**Composer**](https://getcomposer.
    to **`tests/backend/config/test-database.php`**, then modify the database connection settings in the new file.
 
 2. Inside [phpMyAdmin](http://localhost/phpmyadmin),
-   create a MySQL database named `test-mrms-balatan` and import [missbuhi.sql](missbuhi.sql) into it.
+   create a MySQL database named `test-mrms-balatan` and import [missbuhi.sql](mrms-balatan.sql) into it.
 
 3. Run the following command to install the required dependencies.
    ```shell
